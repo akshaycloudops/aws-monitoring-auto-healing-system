@@ -24,3 +24,4 @@ dist-ssr
 *.sw?
 monitoring-dashboard-server-1-key.pem 
 monitoring-dashboard-server-1-key.pem 
+.zip

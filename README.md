@@ -1,16 +1,145 @@
-# React + Vite
+# Production Monitoring and Auto-Healing Infrastructure on AWS
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
+This project demonstrates a production-grade AWS infrastructure designed for high availability, monitoring, auto scaling, and incident recovery simulation. It replicates a real-world production environment with observability, alerting, and automated recovery behavior.
 
-Currently, two official plugins are available:
+The system includes a React-based monitoring dashboard deployed on AWS EC2 behind an Application Load Balancer, integrated with Auto Scaling, CloudWatch monitoring, and SNS alerts.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## Architecture
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Users
+→ Application Load Balancer
+→ Auto Scaling Group
+→ EC2 Instances (2+)
+→ CloudWatch Monitoring
+→ SNS Email Alerts
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Key Features
+
+- Highly available architecture using multi-instance setup
+- Load balancing using AWS Application Load Balancer
+- Auto Scaling Group with dynamic instance management
+- Real-time CPU and system monitoring via CloudWatch
+- Automated email alerts using SNS
+- Health checks and self-healing infrastructure
+- Simulated production incident handling (CPU spike, instance failure)
+- Operational dashboard for infrastructure visibility
+
+---
+
+## AWS Services Used
+
+- Amazon EC2
+- Application Load Balancer (ALB)
+- Auto Scaling Group (ASG)
+- Amazon CloudWatch
+- Amazon SNS
+- IAM Roles and Policies
+- Security Groups
+- Target Groups
+
+---
+
+## Frontend Dashboard
+
+A React-based monitoring UI displaying:
+
+- Running instances status
+- CPU utilization graph
+- Alert summary
+- System health indicators
+- Database/service health simulation
+
+Tech Stack:
+- React (Vite)
+- Recharts
+- Lucide Icons
+- Vanilla CSS styling
+
+---
+
+## Monitoring & Observability
+
+CloudWatch is configured to track:
+
+- CPUUtilization per instance
+- Network In/Out metrics
+- HealthyHostCount from ALB
+- RequestCount metrics
+- Alarm state transitions
+
+Dashboards provide real-time infrastructure visibility.
+
+---
+
+## Alerting System
+
+SNS is configured to send email notifications for:
+
+- CPU utilization > 70%
+- Instance health degradation
+- Auto Scaling events
+- System anomalies
+
+---
+
+## Auto Scaling Behavior
+
+- Minimum Instances: 2
+- Maximum Instances: 4
+- Desired Capacity: 2
+- Scaling Policy: Target CPU Utilization (60%)
+
+Automatically scales up or down based on load.
+
+---
+
+## Incident Simulation
+
+The following failure scenarios were tested:
+
+- High CPU load using stress testing
+- Manual EC2 termination
+- Health check failure simulation
+
+System behavior:
+
+- CloudWatch detects anomaly
+- SNS triggers email alert
+- Auto Scaling replaces unhealthy instances
+- Load Balancer redistributes traffic
+
+---
+
+## Deployment Steps
+
+1. Build React app
+2. Create EC2 instance
+3. Install Nginx
+4. Deploy static build to /var/www/html
+5. Create AMI for template
+6. Configure Target Group
+7. Set up Application Load Balancer
+8. Create Auto Scaling Group
+9. Configure CloudWatch alarms
+10. Set up SNS notifications
+
+---
+
+## Outcome
+
+- Fully functional production-like AWS environment
+- Demonstrates cloud architecture and DevOps principles
+- Real-time monitoring and alerting system
+- Auto-healing infrastructure behavior
+- Professional-grade portfolio project for AWS roles
+
+---
+
+## Author
+
+AWS Solutions Architect Portfolio Project
